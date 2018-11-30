@@ -7,41 +7,65 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.android.UI
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import magym.patternrecognitionvegetables.R
+import magym.patternrecognitionvegetables.presentation.surface.SurfaceView
 import magym.patternrecognitionvegetables.utils.deleteFile
 import magym.patternrecognitionvegetables.utils.showSnackbarExt
 import java.io.File
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
+
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     private val viewModel = MainViewModel()
     private val camera: CameraManager by lazy { CameraManager(this, surface_view) }
 
+    private lateinit var surfaceView: SurfaceView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        swipeRefreshLayout = swipe_refresh_layout.init(this, false)
+
         requestPermissions()
 
-        viewModel.result.observe(this@MainActivity, Observer { showAnswer(it.toString()) })
+        viewModel.resultData.observe(this@MainActivity, Observer {
+            surfaceView.items = it
+            setRefreshing(false)
+        })
+        viewModel.resultError.observe(this@MainActivity, Observer {
+            showAnswer(it.toString())
+            setRefreshing(false)
+        })
+
+        surfaceView = surface_view_map
 
         create_photo.setOnClickListener {
-            create_photo.isEnabled = false
+            setRefreshing(true)
 
-            camera.photo {
-                it.showImage()
+            camera.photo { file ->
+                file.showImage()
                 "Фотография сделана".showSnackbar()
-                viewModel.uploadPhoto(it) { it.deleteFile() }
-
-                create_photo.isEnabled = true
+                viewModel.uploadPhoto(file) { file.deleteFile() }
             }
         }
+    }
+
+    override fun onRefresh() {}
+
+    private fun setRefreshing(refreshing: Boolean) {
+        swipeRefreshLayout.isEnabled = refreshing
+        swipeRefreshLayout.isRefreshing = refreshing
+
+        create_photo.isEnabled = !refreshing
     }
 
     private fun requestPermissions() {
@@ -88,7 +112,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun File.showImage() {
-        image.setImageBitmap(BitmapFactory.decodeFile(this.absolutePath))
+        surfaceView.bitmap = BitmapFactory.decodeFile(this.absolutePath)
     }
 
     private fun setTitleToolbar(text: String) {
@@ -97,7 +121,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun String.showToast() = Toast.makeText(this@MainActivity, this, Toast.LENGTH_SHORT).show()
 
-    private fun String.showSnackbar() = create_photo.showSnackbarExt(this)
+    private fun String.showSnackbar() = layout.showSnackbarExt(this)
+
+    private fun SwipeRefreshLayout.init(listener: SwipeRefreshLayout.OnRefreshListener, enable: Boolean = true): SwipeRefreshLayout {
+        this.setOnRefreshListener(listener)
+        this.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent)
+        if (!enable) this.isEnabled = enable
+        return this
+    }
 
     companion object {
         private const val PERMISSIONS = 1

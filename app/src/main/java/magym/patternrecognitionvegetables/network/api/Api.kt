@@ -1,6 +1,7 @@
 package magym.patternrecognitionvegetables.network.api
 
 import io.reactivex.Single
+import magym.patternrecognitionvegetables.data.Item
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Multipart
@@ -14,6 +15,6 @@ interface Api {
     fun upload(
             @Part("description") description: RequestBody,
             @Part file: MultipartBody.Part
-    ): Single<String>
+    ): Single<List<Item>>
 
 }

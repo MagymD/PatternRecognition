@@ -2,8 +2,8 @@ package magym.patternrecognitionvegetables.utils
 
 import android.util.Log
 
-fun String.log() = Log.d("myTag", this)
+internal fun String.log() = Log.d("myTag", this)
 
-fun String.log(e: Exception) = Log.e("myTag", this, e)
+internal fun Exception.log() = Log.e("myTag", "", this)
 
-fun String.log(e: Throwable) = Log.e("myTag", this, e)
+internal fun Throwable.log() = Log.e("myTag", "", this)
