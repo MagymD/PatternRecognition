@@ -27,8 +27,8 @@ object NetworkManager {
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                //.baseUrl("http://prvserver.pythonanywhere.com/")
-                .baseUrl("http://10.42.0.1:8000/")
+                .baseUrl("https://fruitrecognition.pythonanywhere.com/")
+                //.baseUrl("http://10.42.0.1:8000/")
                 .build()
                 .create(Api::class.java)
     }

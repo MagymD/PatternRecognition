@@ -15,13 +15,13 @@ import java.io.FileOutputStream
 
 
 class CameraManager(private val context: Context,
-                    surfaceView: SurfaceView) {
+                    surface: SurfaceView) {
 
     private var parameters: Camera.Parameters? = null
     private var mediaRecorder: MediaRecorder? = null
 
     init {
-        val holder = surfaceView.holder
+        val holder = surface.holder
         holder.addCallback(object : SurfaceHolder.Callback {
             override fun surfaceCreated(holder: SurfaceHolder) {
                 camera?.setPreviewDisplay(holder)

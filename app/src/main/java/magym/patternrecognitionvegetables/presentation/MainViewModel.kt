@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModel
 import kotlinx.coroutines.launch
 import magym.patternrecognitionvegetables.data.Item
 import magym.patternrecognitionvegetables.network.DataRequestManager
+import magym.patternrecognitionvegetables.utils.deleteFile
 import magym.patternrecognitionvegetables.utils.log
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -13,7 +14,6 @@ import okhttp3.RequestBody
 import java.io.File
 
 class MainViewModel : ViewModel() {
-
     private val requestManager = DataRequestManager()
 
     internal val resultData: LiveData<List<Item>>
@@ -24,7 +24,7 @@ class MainViewModel : ViewModel() {
         get() = previewResultError
     private val previewResultError = MutableLiveData<String>()
 
-    internal fun uploadPhoto(file: File, fileCallback: () -> Unit) {
+    internal fun uploadPhoto(file: File) {
         val description = RequestBody.create(okhttp3.MultipartBody.FORM, file.name)
 
         val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
@@ -33,11 +33,11 @@ class MainViewModel : ViewModel() {
         launch {
             requestManager.requestUploadPhoto(description, body, {
                 previewResultData.postValue(it)
-                fileCallback()
+                file.deleteFile()
             }, {
-                fileCallback()
                 it.log()
                 previewResultError.postValue("Ошибка: ${it.message}")
+                file.deleteFile()
             })
         }
     }

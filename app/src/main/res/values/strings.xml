@@ -4,4 +4,5 @@
     <string name="photo_sent_to_server">Фотография отправлена на сервер</string>
     <string name="permission_requirement">Для полноценной работы приложению необходимо предоставить разрешения. Приложение будет закрыто</string>
     <string name="create_photo">Сфотографировать</string>
+    <string name="gallery">Галерея</string>
 </resources>
