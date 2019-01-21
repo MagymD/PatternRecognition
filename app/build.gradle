@@ -24,12 +24,6 @@ android {
     }
 }
 
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}
-
 androidExtensions {
     experimental = true
 }
