@@ -2,7 +2,9 @@
 Creating and sending a photo to the server. As well as display and selection of found objects.
 
 ## Technologies:
+* Clean architecture
 * MVVM
+* Dependency injection with koin
 * Coroutines
 * Retrofit
 * GsonConverterFactory
