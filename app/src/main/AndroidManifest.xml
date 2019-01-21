@@ -15,6 +15,7 @@
         android:required="true" />
 
     <application
+        android:name=".util.VegetablesApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -34,7 +35,7 @@
         </provider>
 
         <activity
-            android:name=".presentation.MainActivity"
+            android:name="magym.patternrecognitionvegetables.presentation.screen.photo.PhotoActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

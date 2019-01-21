@@ -54,10 +54,13 @@ dependencies {
     implementation "com.android.support:design:$support"
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.27.0-eap13'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.0'
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.4.'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    //Dependency injection
+    implementation "org.koin:koin-android-viewmodel:1.0.2"
 }
