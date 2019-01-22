@@ -41,7 +41,7 @@
                     android:textSize="14sp" />
 
                 <Button
-                    android:id="@+id/open_photo"
+                    android:id="@+id/open_gallery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
