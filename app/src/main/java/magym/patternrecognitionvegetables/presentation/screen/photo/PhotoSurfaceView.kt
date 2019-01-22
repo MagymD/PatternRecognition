@@ -72,10 +72,12 @@ class PhotoSurfaceView(context: Context, attributeSet: AttributeSet) : BaseSurfa
     private fun setRatio() {
         bitmapX = (bitmap?.width ?: 0).toFloat()
         bitmapY = (bitmap?.height ?: 0).toFloat()
+
         val ratioBitmap = screenX / screenY.toFloat()
         val ratioScreen = bitmapX / bitmapY
         val oldRatioX = bitmapX / screenX
         val oldRatioY = bitmapY / screenY
+
         ratioX = if (ratioBitmap < ratioScreen) oldRatioX else oldRatioY
         ratioY = if (ratioBitmap > ratioScreen) oldRatioY else oldRatioX
     }

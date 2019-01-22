@@ -21,6 +21,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import magym.patternrecognitionvegetables.R
 import magym.patternrecognitionvegetables.presentation.common.CameraManager
+import magym.patternrecognitionvegetables.util.extention.deleteFile
 import magym.patternrecognitionvegetables.util.extention.onClick
 import magym.patternrecognitionvegetables.util.extention.showSnackbarExt
 import magym.patternrecognitionvegetables.util.extention.showToast
@@ -127,7 +128,9 @@ class PhotoActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener 
         camera.photo { file ->
             file.showImage()
             getString(R.string.photo_was_taken).showSnackbar()
-            viewModel.uploadPhoto(file)
+            viewModel.uploadPhoto(file) {
+                file.deleteFile()
+            }
         }
     }
 
@@ -141,7 +144,7 @@ class PhotoActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener 
                     setRefreshing(true)
                     val file = File(it.myGetPath())
                     file.showImage()
-                    viewModel.uploadPhoto(file)
+                    viewModel.uploadPhoto(file) {}
                 }
             }
         }

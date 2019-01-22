@@ -1,4 +1,4 @@
-package magym.patternrecognitionvegetables.util
+package magym.patternrecognitionvegetables
 
 import android.app.Application
 import org.koin.android.ext.android.startKoin

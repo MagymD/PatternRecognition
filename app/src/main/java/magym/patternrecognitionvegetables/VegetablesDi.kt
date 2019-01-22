@@ -1,7 +1,7 @@
-package magym.patternrecognitionvegetables.util
+package magym.patternrecognitionvegetables
 
 import com.google.gson.GsonBuilder
-import magym.patternrecognitionvegetables.data.repository.PhotoNetworkRepository
+import magym.patternrecognitionvegetables.data.datasourse.NetworkPhotoDataSource
 import magym.patternrecognitionvegetables.data.service.PhotoService
 import magym.patternrecognitionvegetables.domain.interactor.PhotoInteractor
 import magym.patternrecognitionvegetables.domain.repository.PhotoRepository
@@ -36,15 +36,14 @@ val retrofitModule = module {
                 .client(get())
                 .addConverterFactory(get<GsonConverterFactory>())
                 .addCallAdapterFactory(get<RxJava2CallAdapterFactory>())
-                .baseUrl("https://fruitrecognition.pythonanywhere.com/")
-                //.baseUrl("http://10.42.0.1:8000/")
+                .baseUrl(BuildConfig.ROOT_URL)
                 .build()
     }
 }
 
 val photoModule = module {
     single { get<Retrofit>().create(PhotoService::class.java) }
-    single<PhotoRepository> { PhotoNetworkRepository(get()) }
+    single<PhotoRepository> { NetworkPhotoDataSource(get()) }
     single { PhotoInteractor(get()) }
     single { PhotoViewModel(get()) }
 }
