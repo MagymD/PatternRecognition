@@ -1,8 +1,9 @@
 package magym.patternrecognitionvegetables.presentation.screen.photo
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import android.graphics.Bitmap
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import magym.patternrecognitionvegetables.data.entity.PhotoItemEntity
@@ -11,6 +12,8 @@ import magym.patternrecognitionvegetables.util.extention.log
 import java.io.File
 
 class PhotoViewModel(private val interactor: PhotoInteractor) : ViewModel() {
+
+    val bitmap = MutableLiveData<Bitmap>()
 
     val result: LiveData<List<PhotoItemEntity>>
         get() = previewResult

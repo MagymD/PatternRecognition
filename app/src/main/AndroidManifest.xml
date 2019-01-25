@@ -25,7 +25,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.android.provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -34,9 +34,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity
-            android:name="magym.patternrecognitionvegetables.presentation.screen.photo.PhotoActivity"
-            android:screenOrientation="portrait">
+        <activity android:name="magym.patternrecognitionvegetables.presentation.screen.photo.PhotoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

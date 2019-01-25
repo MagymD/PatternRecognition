@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
     android:layout_width="match_parent"
@@ -9,9 +9,10 @@
     <SurfaceView
         android:id="@+id/surface_view_camera"
         android:layout_width="1px"
-        android:layout_height="1px" />
+        android:layout_height="1px"
+        tools:ignore="MissingConstraints" />
 
-    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,38 +25,35 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
                 android:orientation="horizontal">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/create_photo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/AppTheme.TextButton"
                     android:layout_weight="1"
-                    android:lineSpacingMultiplier="1.3"
                     android:text="@string/create_photo"
-                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/open_gallery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/AppTheme.TextButton"
                     android:layout_weight="1"
-                    android:lineSpacingMultiplier="1.3"
                     android:text="@string/gallery"
-                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
             </LinearLayout>
 
             <magym.patternrecognitionvegetables.presentation.screen.photo.PhotoSurfaceView
-                android:id="@+id/surface_view_map"
+                android:id="@+id/surface_view_photo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
         </LinearLayout>
-    </android.support.v4.widget.SwipeRefreshLayout>
-</android.support.constraint.ConstraintLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

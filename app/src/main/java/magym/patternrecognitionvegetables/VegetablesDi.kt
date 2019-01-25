@@ -36,7 +36,7 @@ val retrofitModule = module {
                 .client(get())
                 .addConverterFactory(get<GsonConverterFactory>())
                 .addCallAdapterFactory(get<RxJava2CallAdapterFactory>())
-                .baseUrl(BuildConfig.ROOT_URL)
+                .baseUrl("https://fruitrecognition.pythonanywhere.com/")
                 .build()
     }
 }
