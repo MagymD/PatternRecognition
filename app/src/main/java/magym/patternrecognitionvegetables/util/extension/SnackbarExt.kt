@@ -1,4 +1,4 @@
-package magym.patternrecognitionvegetables.util.extention
+package magym.patternrecognitionvegetables.util.extension
 
 import android.view.View
 import com.google.android.material.snackbar.Snackbar

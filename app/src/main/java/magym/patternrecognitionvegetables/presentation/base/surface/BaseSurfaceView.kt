@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import magym.patternrecognitionvegetables.util.extention.log
+import magym.patternrecognitionvegetables.util.extension.log
 
 open class BaseSurfaceView(context: Context, attributeSet: AttributeSet) : SurfaceView(context, attributeSet), SurfaceHolder.Callback {
 

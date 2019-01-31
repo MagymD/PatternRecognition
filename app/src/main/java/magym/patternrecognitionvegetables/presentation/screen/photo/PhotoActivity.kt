@@ -18,7 +18,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import magym.patternrecognitionvegetables.R
 import magym.patternrecognitionvegetables.presentation.common.CameraManager
-import magym.patternrecognitionvegetables.util.extention.*
+import magym.patternrecognitionvegetables.util.extension.*
 import org.koin.android.ext.android.inject
 import java.io.File
 
@@ -126,7 +126,7 @@ class PhotoActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener 
 
         // Некорректное отображение фотографии
         camera.photo { file ->
-            viewModel.bitmap.postValue(file.toBitmap())
+            viewModel.bitmap.value = file.toBitmap()
             getString(R.string.photo_was_taken).showSnackbar()
             viewModel.uploadPhoto(file) { file.deleteFile() }
         }
@@ -139,8 +139,8 @@ class PhotoActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        when (requestCode) {
-            GALLERY_REQUEST -> if (resultCode == Activity.RESULT_OK) {
+        when {
+            requestCode == GALLERY_REQUEST && resultCode == Activity.RESULT_OK -> {
                 val selectedImage = data?.data
 
                 selectedImage?.let { uri ->
@@ -148,7 +148,7 @@ class PhotoActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener 
 
                     val file = File(uri.getMyPath(contentResolver))
 
-                    viewModel.bitmap.postValue(file.toBitmap())
+                    viewModel.bitmap.value = file.toBitmap()
                     viewModel.uploadPhoto(file) {}
                 }
             }

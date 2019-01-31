@@ -9,7 +9,7 @@ import android.media.MediaRecorder
 import android.os.Build
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import magym.patternrecognitionvegetables.util.extention.createImageFile
+import magym.patternrecognitionvegetables.util.extension.createImageFile
 import java.io.File
 import java.io.FileOutputStream
 

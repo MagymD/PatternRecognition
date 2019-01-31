@@ -2,7 +2,7 @@ package magym.patternrecognitionvegetables.presentation.base.surface
 
 import android.graphics.Canvas
 import android.view.SurfaceHolder
-import magym.patternrecognitionvegetables.util.extention.log
+import magym.patternrecognitionvegetables.util.extension.log
 
 class RenderingThread(private val view: BaseSurfaceView,
                       private val holder: SurfaceHolder) : Thread() {

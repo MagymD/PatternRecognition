@@ -3,15 +3,14 @@ package magym.patternrecognitionvegetables.presentation.screen.photo
 import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import magym.patternrecognitionvegetables.data.entity.PhotoItemEntity
 import magym.patternrecognitionvegetables.domain.interactor.PhotoInteractor
-import magym.patternrecognitionvegetables.util.extention.log
+import magym.patternrecognitionvegetables.presentation.base.BaseViewModel
+import magym.patternrecognitionvegetables.util.extension.log
 import java.io.File
 
-class PhotoViewModel(private val interactor: PhotoInteractor) : ViewModel() {
+class PhotoViewModel(private val interactor: PhotoInteractor) : BaseViewModel() {
 
     val bitmap = MutableLiveData<Bitmap>()
 
@@ -24,7 +23,7 @@ class PhotoViewModel(private val interactor: PhotoInteractor) : ViewModel() {
     private val previewError = MutableLiveData<String>()
 
     fun uploadPhoto(file: File, fileLoadedCallback: () -> Unit) {
-        GlobalScope.launch {
+        scope.launch {
             interactor.requestUploadPhoto(file, {
                 previewResult.postValue(it)
                 fileLoadedCallback()
